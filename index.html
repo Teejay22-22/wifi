@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twinz Cooperate Services - Village Petition</title>
+<title>Twins Cooperate Services - Village Petition</title>
 <style>
   :root{
     --blue1: #2563eb;
@@ -107,7 +107,7 @@
     text-align: center;
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     color: var(--blue1);
   }
   
@@ -116,7 +116,7 @@
     background: #e2e8f0;
     border-radius: 999px;
     height: 14px;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     overflow: hidden;
   }
   .progress-bar {
@@ -127,7 +127,7 @@
     border-radius: 999px;
   }
   
-  /* 2026 WhatsApp Button Style */
+  /* 2026 WhatsApp Button Style - FIXED FIT */
   .whatsapp-section { margin-top: 20px; }
   .whatsapp-section h3 { color: var(--blue1); text-align: center; }
   
@@ -135,19 +135,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
-    padding: 16px;
+    padding: 14px 12px; /* reduced padding so it fits small screens */
     margin-bottom: 12px;
     background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
     color: white;
     text-decoration: none;
     border-radius: 14px;
-    font-size: 16px;
+    font-size: 15px; /* slightly smaller font */
     font-weight: 700;
     box-shadow: 0 6px 18px rgba(22,163,74,0.35);
     transition: all 0.2s;
     border: 2px solid rgba(255,255,255,0.3);
+    box-sizing: border-box; /* prevents overflow */
+    white-space: nowrap; /* stops text wrapping */
   }
   .whatsapp-btn:hover { 
     transform: translateY(-2px); 
@@ -155,14 +157,15 @@
   }
   .whatsapp-btn:active { transform: scale(0.97); }
   .whatsapp-icon {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0; /* prevents icon from shrinking */
     background: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
   }
 </style>
 </head>
@@ -199,7 +202,7 @@
       <input type="tel" id="phone" placeholder="Enter cell number e.g. 0712345678" required>
       <button type="submit" id="submitBtn">Sign Petition ✊</button>
     </form>
-    <p style="font-size:12px;color:#64748b;text-align:center;margin-top:10px">Your number will be saved securely for petition purposes only</p>
+    <p style="font-size:12px;color:#64748b;text-align:center;margin-top:10px">Your number is saved securely for petition purposes only</p>
   </div>
 
   <div class="card whatsapp-section">
@@ -221,7 +224,7 @@
 
 <script>
 const GOAL = 1000;
-const SCRIPT_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE'; // Replace this
+const SCRIPT_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
 
 let count = 0;
 const countEl = document.getElementById('count');
@@ -229,16 +232,13 @@ const progressEl = document.getElementById('progress');
 const form = document.getElementById('form');
 const submitBtn = document.getElementById('submitBtn');
 
-// Load existing count from Google Sheet
 async function loadCount() {
   try {
     const res = await fetch(SCRIPT_URL + '?action=count');
     const data = await res.json();
     count = data.count || 0;
     updateUI();
-  } catch(e) {
-    console.log('Using local count');
-  }
+  } catch(e) {}
 }
 
 function updateUI() {
@@ -247,7 +247,6 @@ function updateUI() {
   progressEl.style.width = percent + '%';
 }
 
-// Submit signature
 form.onsubmit = async function(e) {
   e.preventDefault();
   let phone = document.getElementById('phone').value.trim().replace(/\s/g,'');
@@ -257,7 +256,6 @@ form.onsubmit = async function(e) {
     return;
   }
   
-  // Check local duplicate
   let signed = JSON.parse(localStorage.getItem('signed') || '[]');
   if(signed.includes(phone)) { 
     alert('You already signed with this number!'); 
@@ -268,14 +266,12 @@ form.onsubmit = async function(e) {
   submitBtn.textContent = 'Saving...';
   
   try {
-    // Save to Google Sheets
     await fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       body: JSON.stringify({phone: phone, time: new Date().toISOString()})
     });
     
-    // Save locally + update UI
     signed.push(phone);
     localStorage.setItem('signed', JSON.stringify(signed));
     count++;
@@ -283,20 +279,19 @@ form.onsubmit = async function(e) {
     document.getElementById('phone').value = '';
     
     if(count >= GOAL) {
-      alert('🎉 Goal reached! 1000 signatures collected! Twins Cooperate will contact the municipality.');
+      alert('🎉 Goal reached! 1000 signatures collected!');
     } else {
       alert('Thank you! Your signature has been added.');
     }
     
   } catch(e) {
-    alert('Error saving. Please try again.');
+    alert('Error saving. Please check internet connection.');
   }
   
   submitBtn.disabled = false;
   submitBtn.textContent = 'Sign Petition ✊';
 }
 
-// Load count on page load
 loadCount();
 </script>
 </body>
