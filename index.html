@@ -3,163 +3,345 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twinz Cooperate Services - Village Petition</title>
+<title>Twins Cooperate Services - Unlimited Wifi Petition</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+  
   body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f0f4ff;
-    color: #333;
-  }
-.container {
-    max-width: 500px;
-    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
     padding: 20px;
+    color: #1a1a1a;
   }
-.header {
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  
+  .container {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
-    padding: 25px 20px;
+    padding: 40px 25px;
+    border-radius: 24px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: slideDown 0.6s ease;
+  }
+  
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .header h1 { 
+    font-size: 26px; 
+    font-weight: 700; 
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  
+  .header p { 
+    font-size: 15px; 
+    opacity: 0.95; 
+    line-height: 1.6;
+  }
+  
+  .wifi-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 28px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.5);
+    animation: fadeIn 0.8s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .graphic {
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    animation: fadeIn 0.8s ease 0.2s both;
+  }
+  
+  .graphic img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .graphic-caption {
+    background: white;
+    padding: 14px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #667eea;
+  }
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #1a1a1a;
+  }
+  
+  .benefits { 
+    display: grid; 
+    gap: 12px; 
+  }
+  
+  .benefit {
+    padding: 16px;
+    background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
+    border-left: 4px solid #667eea;
     border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+  }
+  
+  .benefit:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+  }
+  
+  .benefit b { 
+    color: #667eea; 
+    font-weight: 600;
+  }
+  
+  .counter-box {
     text-align: center;
     margin-bottom: 20px;
   }
-.header h1 { margin: 0; font-size: 22px; }
-.header p { margin: 8px 0 0 0; font-size: 14px; opacity: 0.9; }
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  
+  .counter {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-.graphic {
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(180deg, #eef2ff 0%, #dbeafe 100%);
-    border-radius: 12px;
-    margin-bottom: 15px;
+  
+  .counter-label {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
   }
-.graphic img {
-    max-width: 100%;
-    height: auto;
+  
+  .progress-bar {
+    height: 10px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.5s ease;
     border-radius: 10px;
   }
-.benefits { display: grid; gap: 10px; }
-.benefit {
-    padding: 12px;
-    background: #eef2ff;
-    border-left: 4px solid #4f46e5;
-    border-radius: 6px;
-    font-size: 14px;
-  }
-.benefit b { color: #4f46e5; }
-input {
+  
+  input {
     width: 100%;
-    padding: 14px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
     font-size: 16px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
   }
-button {
+  
+  input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  }
+  
+  button {
     width: 100%;
-    padding: 14px;
-    background: #4f46e5;
+    padding: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
   }
-button:active { transform: scale(0.98); }
-.counter {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  
+  button:active { 
+    transform: scale(0.98);
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
   }
-.whatsapp-section {
+  
+  .whatsapp-section {
     margin-top: 20px;
-    text-align: center;
   }
-.whatsapp-btn {
-    display: block;
+  
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
-    padding: 14px;
-    margin-bottom: 10px;
-    background: #25D366;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
   }
-.whatsapp-btn:active { transform: scale(0.98); }
+  
+  .whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  }
+  
+  .success {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    display: none;
+    margin-bottom: 12px;
+    border: 2px solid #10b981;
+  }
+  
+  @media (max-width: 480px) {
+    .header h1 { font-size: 22px; }
+    .card { padding: 22px; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
 
   <div class="header">
-    <h1>Twinz Cooperate Services Provides Unlimited WIFI</h1>
-    <p>Sign petition to bring unlimited wifi internet for home and business that is reliable and affordable starting at only R600 per month. Join us to make our community better.</p>
+    <div class="wifi-icon">📡</div>
+    <h1>Twinz Cooperate Services</h1>
+    <p>Bring unlimited wifi internet for home & business. Reliable + affordable from only R600/month. Join the movement.</p>
   </div>
 
   <div class="graphic">
-    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" alt="Community wifi">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953de1ca67?w=700&q=80" alt="Diverse community connected">
+    <div class="graphic-caption">📡 Connecting Every Home & Business in Our Community</div>
   </div>
 
   <div class="card">
-    <h3 style="margin-top:0">Why Unlimited Wifi?</h3>
+    <h3>Why Unlimited Wifi?</h3>
     <div class="benefits">
-      <div class="benefit"><b>💰 Save Money:</b> R600 unlimited vs R99/GB on cell data</div>
+      <div class="benefit"><b>💰 Save Money:</b> R600 unlimited vs R99/GB on cell data. Save thousands monthly</div>
       <div class="benefit"><b>🎓 Education:</b> Kids do homework + online classes without data stress</div>
       <div class="benefit"><b>💼 Business:</b> Apply online + sell on Facebook + grow your business from home</div>
-      <div class="benefit"><b>🎬 Entertainment:</b> Netflix streaming + DSTV streaming + YouTube + Showmax without data worries</div>
-      <div class="benefit"><b>⚡ Reliable 24/7:</b> No more "out of data". Whole family + business connected</div>
+      <div class="benefit"><b>🎬 Entertainment:</b> Netflix + DSTV streaming + YouTube + Showmax without data worries</div>
+      <div class="benefit"><b>⚡ Reliable 24/7:</b> No more "out of data". Whole family + business always connected</div>
     </div>
   </div>
 
   <div class="card">
-    <div class="counter">Signatures: <span id="count">0</span> / 1000</div>
+    <div class="counter-box">
+      <div class="counter"><span id="count">0</span> / 1000</div>
+      <div class="counter-label">Signatures collected</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="bar"></div>
+      </div>
+    </div>
+    
+    <div id="success" class="success">✅ Thank you! Your number is added. Share with neighbors</div>
+    
     <form id="form">
       <input type="tel" id="phone" placeholder="Enter your cell number e.g. 0712345678" required>
       <button type="submit">Sign Petition ✊</button>
     </form>
   </div>
 
-  <!-- WhatsApp Contact Numbers -->
   <div class="card whatsapp-section">
-    <h3 style="margin-top:0">Contact Twinz Cooperate Services</h3>
-    <p style="font-size:14px;margin-bottom:15px">Click to chat with us on WhatsApp:</p>
-    <a href="https://wa.me/27682547352" target="_blank" class="whatsapp-btn">📱 WhatsApp: 068 254 7352</a>
-    <a href="https://wa.me/27698949596" target="_blank" class="whatsapp-btn">📱 WhatsApp: 069 894 9596</a>
+    <h3>Contact Twinz Cooperate Services</h3>
+    <a href="https://wa.me/27682547352" target="_blank" class="whatsapp-btn">
+      📱 WhatsApp: 068 254 7352
+    </a>
+    <a href="https://wa.me/27698949596" target="_blank" class="whatsapp-btn">
+      📱 WhatsApp: 069 894 9596
+    </a>
   </div>
 
 </div>
 
 <script>
-let count = 0;
-const countEl = document.getElementById('count');
-const form = document.getElementById('form');
+const GOAL = 1000;
+let numbers = JSON.parse(localStorage.getItem("wifiNumbers") || "[]");
+updateCounter();
 
-form.onsubmit = function(e) {
+document.getElementById("form").onsubmit = function(e) {
   e.preventDefault();
-  let phone = document.getElementById('phone').value.trim();
+  let phone = document.getElementById("phone").value.trim();
+
   if(phone.length < 10) {
-    alert('Please enter a valid phone number');
+    alert("Please enter a valid phone number");
     return;
   }
-  count++;
-  countEl.textContent = count;
-  document.getElementById('phone').value = '';
-  alert('Thank you! Your signature has been added.');
-  if(count >= 1000) {
-    alert('🎉 Goal reached! 1000 signatures collected!');
+
+  if(numbers.includes(phone)) {
+    alert("This number already signed");
+    return;
   }
+
+  numbers.unshift(phone);
+  localStorage.setItem("wifiNumbers", JSON.stringify(numbers));
+
+  document.getElementById("form").reset();
+  document.getElementById("success").style.display = "block";
+  updateCounter();
+
+  setTimeout(() => {
+    document.getElementById("success").style.display = "none";
+  }, 3000);
+};
+
+function updateCounter() {
+  let count = numbers.length;
+  document.getElementById("count").textContent = count;
+  document.getElementById("bar").style.width = Math.min((count/GOAL)*100, 100) + "%";
 }
 </script>
 </body>
