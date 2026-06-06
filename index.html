@@ -3,164 +3,301 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twinz Cooperate Services - Village Petition</title>
+<title>Twins Cooperate Services - Village Petition</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f0f4ff;
-    color: #333;
+  :root{
+    --blue1: #2563eb;
+    --blue2: #3b82f6; 
+    --blue3: #60a5fa;
+    --glass: rgba(255,255,255,0.7);
   }
-.container {
-    max-width: 500px;
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(160deg, #dbeafe 0%, #eff6ff 50%, #dbeafe 100%);
+    color: #1e293b;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 520px;
     margin: 0 auto;
     padding: 20px;
   }
-.header {
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  .header {
+    background: linear-gradient(135deg, var(--blue1) 0%, var(--blue2) 50%, var(--blue3) 100%);
     color: white;
-    padding: 25px 20px;
-    border-radius: 12px;
+    padding: 30px 20px;
+    border-radius: 20px;
     text-align: center;
     margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(37,99,235,0.25);
+    backdrop-filter: blur(10px);
   }
-.header h1 { margin: 0; font-size: 22px; }
-.header p { margin: 8px 0 0 0; font-size: 14px; opacity: 0.9; }
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  .header h1 { margin: 0; font-size: 24px; font-weight: 700; }
+  .header p { margin: 10px 0 0 0; font-size: 15px; opacity: 0.95; line-height: 1.4; }
+  
+  .card {
+    background: var(--glass);
+    padding: 22px;
+    border-radius: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 20px rgba(37,99,235,0.08);
+    border: 1px solid rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
   }
-.graphic {
+  .graphic {
     text-align: center;
-    padding: 20px;
-    background: linear-gradient(180deg, #eef2ff 0%, #dbeafe 100%);
-    border-radius: 12px;
-    margin-bottom: 15px;
+    padding: 0;
+    border-radius: 18px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(37,99,235,0.1);
   }
-.graphic img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-.benefits { display: grid; gap: 10px; }
-.benefit {
-    padding: 12px;
-    background: #eef2ff;
-    border-left: 4px solid #4f46e5;
-    border-radius: 6px;
-    font-size: 14px;
-  }
-.benefit b { color: #4f46e5; }
-input {
+  .graphic img {
     width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  .benefits { display: grid; gap: 12px; }
+  .benefit {
     padding: 14px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    background: linear-gradient(90deg, #eff6ff 0%, #dbeafe 100%);
+    border-left: 4px solid var(--blue2);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .benefit b { color: var(--blue1); }
+  
+  input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
     font-size: 16px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    background: white;
+    transition: 0.2s;
   }
-button {
+  input:focus {
+    outline: none;
+    border-color: var(--blue2);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  }
+  
+  button {
     width: 100%;
-    padding: 14px;
-    background: #4f46e5;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--blue1) 0%, var(--blue2) 100%);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 6px 16px rgba(37,99,235,0.3);
+    transition: transform 0.1s, box-shadow 0.2s;
   }
-button:active { transform: scale(0.98); }
-.counter {
+  button:active { transform: scale(0.97); }
+  button:disabled { opacity: 0.6; cursor: not-allowed; }
+  
+  .counter {
     text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--blue1);
   }
-.whatsapp-section {
-    margin-top: 20px;
-    text-align: center;
+  
+  /* Progress Bar 2026 Style */
+  .progress-wrap {
+    background: #e2e8f0;
+    border-radius: 999px;
+    height: 14px;
+    margin-bottom: 8px;
+    overflow: hidden;
   }
-.whatsapp-btn {
-    display: block;
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue1) 0%, var(--blue3) 100%);
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 999px;
+  }
+  
+  /* 2026 WhatsApp Button Style */
+  .whatsapp-section { margin-top: 20px; }
+  .whatsapp-section h3 { color: var(--blue1); text-align: center; }
+  
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
-    padding: 14px;
-    margin-bottom: 10px;
-    background: #25D366;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 14px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(22,163,74,0.35);
+    transition: all 0.2s;
+    border: 2px solid rgba(255,255,255,0.3);
   }
-.whatsapp-btn:active { transform: scale(0.98); }
+  .whatsapp-btn:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 25px rgba(22,163,74,0.45);
+  }
+  .whatsapp-btn:active { transform: scale(0.97); }
+  .whatsapp-icon {
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
 </style>
 </head>
 <body>
 <div class="container">
 
   <div class="header">
-    <h1>Twinz Cooperate Services Provides Unlimited WIFI</h1>
-    <p>Sign petition to bring unlimited wifi internet for home and business that is reliable and affordable starting at only R600 per month. Join us to make our community better.</p>
+    <h1>Twins Cooperate Services 🌐</h1>
+    <p>Sign petition to bring unlimited wifi internet for home & business. Reliable + affordable from only R600/month. Let's connect our community.</p>
   </div>
 
   <div class="graphic">
-    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" alt="Community wifi">
+    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" alt="Community wifi">
   </div>
 
   <div class="card">
-    <h3 style="margin-top:0">Why Unlimited Wifi?</h3>
+    <h3 style="margin-top:0; color:var(--blue1)">Why Unlimited Wifi?</h3>
     <div class="benefits">
       <div class="benefit"><b>💰 Save Money:</b> R600 unlimited vs R99/GB on cell data</div>
       <div class="benefit"><b>🎓 Education:</b> Kids do homework + online classes without data stress</div>
-      <div class="benefit"><b>💼 Business:</b> Apply online + sell on Facebook + grow your business from home</div>
-      <div class="benefit"><b>🎬 Entertainment:</b> Netflix streaming + DSTV streaming + YouTube + Showmax without data worries</div>
-      <div class="benefit"><b>⚡ Reliable 24/7:</b> No more "out of data". Whole family + business connected</div>
+      <div class="benefit"><b>💼 Business:</b> Apply online + sell on Facebook + grow from home</div>
+      <div class="benefit"><b>🎬 Entertainment:</b> Netflix + DSTV + YouTube + Showmax no data worries</div>
+      <div class="benefit"><b>⚡ Reliable 24/7:</b> No more "out of data". Whole family connected</div>
     </div>
   </div>
 
   <div class="card">
     <div class="counter">Signatures: <span id="count">0</span> / 1000</div>
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progress"></div>
+    </div>
+    
     <form id="form">
-      <input type="tel" id="phone" placeholder="Enter your cell number e.g. 0712345678" required>
-      <button type="submit">Sign Petition ✊</button>
+      <input type="tel" id="phone" placeholder="Enter cell number e.g. 0712345678" required>
+      <button type="submit" id="submitBtn">Sign Petition ✊</button>
     </form>
+    <p style="font-size:12px;color:#64748b;text-align:center;margin-top:10px">Your number will be saved securely for petition purposes only</p>
   </div>
 
-  <!-- WhatsApp Contact Numbers -->
   <div class="card whatsapp-section">
-    <h3 style="margin-top:0">Contact Twinz Cooperate Services</h3>
-    <p style="font-size:14px;margin-bottom:15px">Click to chat with us on WhatsApp:</p>
-    <a href="https://wa.me/27682547352" target="_blank" class="whatsapp-btn">📱 WhatsApp: 068 254 7352</a>
-    <a href="https://wa.me/27698949596" target="_blank" class="whatsapp-btn">📱 WhatsApp: 069 894 9596</a>
+    <h3 style="margin-top:0">Contact Twins Cooperate Services</h3>
+    <p style="font-size:14px;margin-bottom:15px;text-align:center;color:#475569">Tap to chat with us instantly on WhatsApp:</p>
+    
+    <a href="https://wa.me/27682547352" target="_blank" class="whatsapp-btn">
+      <span class="whatsapp-icon">💬</span>
+      WhatsApp: 068 254 7352
+    </a>
+    
+    <a href="https://wa.me/27698949596" target="_blank" class="whatsapp-btn">
+      <span class="whatsapp-icon">💬</span>
+      WhatsApp: 069 894 9596
+    </a>
   </div>
 
 </div>
 
 <script>
+const GOAL = 1000;
+const SCRIPT_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE'; // Replace this
+
 let count = 0;
 const countEl = document.getElementById('count');
+const progressEl = document.getElementById('progress');
 const form = document.getElementById('form');
+const submitBtn = document.getElementById('submitBtn');
 
-form.onsubmit = function(e) {
-  e.preventDefault();
-  let phone = document.getElementById('phone').value.trim();
-  if(phone.length < 10) {
-    alert('Please enter a valid phone number');
-    return;
-  }
-  count++;
-  countEl.textContent = count;
-  document.getElementById('phone').value = '';
-  alert('Thank you! Your signature has been added.');
-  if(count >= 1000) {
-    alert('🎉 Goal reached! 1000 signatures collected!');
+// Load existing count from Google Sheet
+async function loadCount() {
+  try {
+    const res = await fetch(SCRIPT_URL + '?action=count');
+    const data = await res.json();
+    count = data.count || 0;
+    updateUI();
+  } catch(e) {
+    console.log('Using local count');
   }
 }
+
+function updateUI() {
+  countEl.textContent = count;
+  let percent = Math.min((count / GOAL) * 100, 100);
+  progressEl.style.width = percent + '%';
+}
+
+// Submit signature
+form.onsubmit = async function(e) {
+  e.preventDefault();
+  let phone = document.getElementById('phone').value.trim().replace(/\s/g,'');
+  
+  if(!/^0[6-8][0-9]{8}$/.test(phone)) {
+    alert('Please enter valid SA number: 0712345678');
+    return;
+  }
+  
+  // Check local duplicate
+  let signed = JSON.parse(localStorage.getItem('signed') || '[]');
+  if(signed.includes(phone)) { 
+    alert('You already signed with this number!'); 
+    return; 
+  }
+  
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Saving...';
+  
+  try {
+    // Save to Google Sheets
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({phone: phone, time: new Date().toISOString()})
+    });
+    
+    // Save locally + update UI
+    signed.push(phone);
+    localStorage.setItem('signed', JSON.stringify(signed));
+    count++;
+    updateUI();
+    document.getElementById('phone').value = '';
+    
+    if(count >= GOAL) {
+      alert('🎉 Goal reached! 1000 signatures collected! Twins Cooperate will contact the municipality.');
+    } else {
+      alert('Thank you! Your signature has been added.');
+    }
+    
+  } catch(e) {
+    alert('Error saving. Please try again.');
+  }
+  
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Sign Petition ✊';
+}
+
+// Load count on page load
+loadCount();
 </script>
 </body>
 </html>
