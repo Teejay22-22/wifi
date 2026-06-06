@@ -24,22 +24,8 @@
     text-align: center;
     margin-bottom: 20px;
   }
-.logo {
-    max-width: 140px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    background: white;
-    padding: 8px;
-  }
-.wifi-img {
-    width: 80px;
-    height: 80px;
-    margin: 15px auto 0;
-    display: block;
-    filter: brightness(0) invert(1);
-  }
-.header h1 { margin: 0; font-size: 20px; }
-.header p { margin: 10px 0 0 0; font-size: 14px; line-height: 1.4; }
+.header h1 { margin: 0; font-size: 22px; }
+.header p { margin: 8px 0 0 0; font-size: 14px; opacity: 0.9; }
 .card {
     background: white;
     padding: 20px;
@@ -59,12 +45,6 @@
     height: auto;
     border-radius: 10px;
   }
-.graphic p {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #4338ca;
-    font-weight: bold;
-  }
 .benefits { display: grid; gap: 10px; }
 .benefit {
     padding: 12px;
@@ -74,7 +54,7 @@
     font-size: 14px;
   }
 .benefit b { color: #4f46e5; }
-  input {
+input {
     width: 100%;
     padding: 14px;
     border: 2px solid #ddd;
@@ -83,7 +63,7 @@
     box-sizing: border-box;
     margin-bottom: 10px;
   }
-  button {
+button {
     width: 100%;
     padding: 14px;
     background: #4f46e5;
@@ -94,70 +74,42 @@
     font-weight: bold;
     cursor: pointer;
   }
+button:active { transform: scale(0.98); }
 .counter {
     text-align: center;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
   }
-.whatsapp {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-  }
-.whatsapp a {
-    flex: 1;
+.whatsapp-section {
+    margin-top: 20px;
     text-align: center;
-    padding: 12px;
+  }
+.whatsapp-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 10px;
     background: #25D366;
     color: white;
     text-decoration: none;
     border-radius: 8px;
+    font-size: 16px;
     font-weight: bold;
-    font-size: 14px;
   }
-.email {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-  }
-.email a { color: #4f46e5; text-decoration: none; }
-.success {
-    background: #d1fae5;
-    color: #065f46;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    display: none;
-  }
+.whatsapp-btn:active { transform: scale(0.98); }
 </style>
 </head>
 <body>
 <div class="container">
 
   <div class="header">
-    <!-- Logo embedded so it always shows -->
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccq1iAAAM" alt="Twins Cooperate Services Logo" class="logo">
-
-    <h1>Twins Cooperate Services Provides Unlimited Wifi</h1>
-
-    <!-- Wifi icon -->
-    <img src="https://cdn-icons-png.flaticon.com/512/39/39740.png" alt="Wifi Signal" class="wifi-img">
-
-    <p>Sign petition to bring unlimited wifi internet for home and business that is reliable and affordable starting at only R600 per month. Join us to make our community better.</p>
+    <h1>Twinz Cooperate Services</h1>
+    <p>Sign petition for unlimited wifi in our community</p>
   </div>
 
-  <!-- NEW GRAPHIC SECTION -->
   <div class="graphic">
-    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" alt="Community connected by wifi">
-    <p>📡 Connecting Every Home & Business in Our Community</p>
-  </div>
-
-  <div class="card">
-    <div class="counter">Signatures: <span id="count">0</span> / 1000</div>
-    <div style="height:8px;background:#e0e0e0;border-radius:4px;overflow:hidden">
-      <div id="bar" style="height:100%;width:0%;background:#4f46e5;transition:0.5s"></div>
-    </div>
+    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" alt="Community wifi">
   </div>
 
   <div class="card">
@@ -171,71 +123,42 @@
   </div>
 
   <div class="card">
-    <h3 style="margin-top:0">Add Your Phone Number</h3>
-    <div id="success" class="success">Thank you! Your number is added 🙏 Share with neighbors</div>
+    <div class="counter">Signatures: <span id="count">0</span> / 1000</div>
     <form id="form">
       <input type="tel" id="phone" placeholder="Enter your cell number e.g. 0712345678" required>
       <button type="submit">Sign Petition ✊</button>
     </form>
   </div>
 
-  <div class="card">
-    <h3 style="margin-top:0">Contact Twins Cooperate Services</h3>
-    <div class="whatsapp">
-      <a href="https://wa.me/27XXXXXXXXXX?text=Hi, I signed the wifi petition for my village" target="_blank">WhatsApp 1</a>
-      <a href="https://wa.me/27YYYY?text=Hi, I signed the wifi petition for my village" target="_blank">WhatsApp 2</a>
-    </div>
-    <div class="email">
-      Email: <a href="mailto:twinz.cooperate.services@gmail.com">twinz.cooperate.services@gmail.com</a>
-    </div>
+  <!-- WhatsApp Contact Numbers -->
+  <div class="card whatsapp-section">
+    <h3 style="margin-top:0">Contact Twinz Cooperate Services</h3>
+    <p style="font-size:14px;margin-bottom:15px">Click to chat with us on WhatsApp:</p>
+    <a href="https://wa.me/27682547352" target="_blank" class="whatsapp-btn">📱 WhatsApp: 068 254 7352</a>
+    <a href="https://wa.me/27698949596" target="_blank" class="whatsapp-btn">📱 WhatsApp: 069 894 9596</a>
   </div>
 
 </div>
 
 <script>
-const GOAL = 1000;
-// Replace with your 2 WhatsApp numbers: 27 + number without 0
-const WHATSAPP1 = "27712345678";
-const WHATSAPP2 = "27823456789";
+let count = 0;
+const countEl = document.getElementById('count');
+const form = document.getElementById('form');
 
-// Load saved numbers
-let numbers = JSON.parse(localStorage.getItem("wifiNumbers") || "[]");
-updateCounter();
-
-document.getElementById("form").onsubmit = function(e) {
+form.onsubmit = function(e) {
   e.preventDefault();
-  let phone = document.getElementById("phone").value.trim();
-
+  let phone = document.getElementById('phone').value.trim();
   if(phone.length < 10) {
-    alert("Please enter a valid phone number");
+    alert('Please enter a valid phone number');
     return;
   }
-
-  if(numbers.includes(phone)) {
-    alert("This number already signed");
-    return;
+  count++;
+  countEl.textContent = count;
+  document.getElementById('phone').value = '';
+  alert('Thank you! Your signature has been added.');
+  if(count >= 1000) {
+    alert('🎉 Goal reached! 1000 signatures collected!');
   }
-
-  numbers.unshift(phone);
-  localStorage.setItem("wifiNumbers", JSON.stringify(numbers));
-
-  document.getElementById("form").reset();
-  document.getElementById("success").style.display = "block";
-  updateCounter();
-
-  setTimeout(() => {
-    document.getElementById("success").style.display = "none";
-  }, 3000);
-};
-
-function updateCounter() {
-  let count = numbers.length;
-  document.getElementById("count").textContent = count;
-  document.getElementById("bar").style.width = Math.min((count/GOAL)*100, 100) + "%";
-
-  // Update WhatsApp links
-  document.querySelectorAll(".whatsapp a")[0].href = `https://wa.me/${WHATSAPP1}?text=Hi, I signed the wifi petition for my village`;
-  document.querySelectorAll(".whatsapp a")[1].href = `https://wa.me/${WHATSAPP2}?text=Hi, I signed the wifi petition for my village`;
 }
 </script>
 </body>
