@@ -126,7 +126,6 @@
     border-radius: 999px;
   }
   
-  /* Contact Buttons */
   .contact-section { margin-top: 20px; }
   .contact-section h3 { color: var(--blue1); text-align: center; }
   
@@ -156,9 +155,7 @@
     transform: translateY(-2px); 
     box-shadow: 0 10px 25px rgba(22,163,74,0.45);
   }
-  .whatsapp-btn:active { transform: scale(0.97); }
   
-  /* New Email Button - Blue theme */
   .email-btn {
     display: flex;
     align-items: center;
@@ -185,7 +182,6 @@
     transform: translateY(-2px); 
     box-shadow: 0 10px 25px rgba(37,99,235,0.45);
   }
-  .email-btn:active { transform: scale(0.97); }
   
   .contact-icon {
     width: 22px;
@@ -206,9 +202,6 @@
       padding: 12px 8px;
       font-size: 14px;
       line-height: 1.3;
-    }
-    .contact-icon {
-      margin-bottom: 2px;
     }
   }
 </style>
@@ -263,7 +256,6 @@
       <span>WhatsApp: 069 894 9596</span>
     </a>
     
-    <!-- New Email Button -->
     <a href="mailto:twinz.cooperate.services@gmail.com" class="email-btn">
       <span class="contact-icon">✉️</span>
       <span>twinz.cooperate.services@gmail.com</span>
@@ -274,6 +266,7 @@
 
 <script>
 const GOAL = 1000;
+// STEP 1: Paste your Google Apps Script Web App URL here after setup below
 const SCRIPT_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
 
 let count = 0;
@@ -282,13 +275,16 @@ const progressEl = document.getElementById('progress');
 const form = document.getElementById('form');
 const submitBtn = document.getElementById('submitBtn');
 
+// Load total signatures from Google Sheet on page load
 async function loadCount() {
   try {
     const res = await fetch(SCRIPT_URL + '?action=count');
     const data = await res.json();
     count = data.count || 0;
     updateUI();
-  } catch(e) {}
+  } catch(e) {
+    console.log('Could not load count from Sheets');
+  }
 }
 
 function updateUI() {
@@ -306,6 +302,7 @@ form.onsubmit = async function(e) {
     return;
   }
   
+  // Prevent same device signing twice
   let signed = JSON.parse(localStorage.getItem('signed') || '[]');
   if(signed.includes(phone)) { 
     alert('You already signed with this number!'); 
@@ -316,12 +313,18 @@ form.onsubmit = async function(e) {
   submitBtn.textContent = 'Saving...';
   
   try {
+    // Save to Google Sheets
     await fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      body: JSON.stringify({phone: phone, time: new Date().toISOString()})
+      body: JSON.stringify({
+        phone: phone, 
+        time: new Date().toISOString(),
+        userAgent: navigator.userAgent
+      })
     });
     
+    // Update UI
     signed.push(phone);
     localStorage.setItem('signed', JSON.stringify(signed));
     count++;
@@ -329,13 +332,13 @@ form.onsubmit = async function(e) {
     document.getElementById('phone').value = '';
     
     if(count >= GOAL) {
-      alert('🎉 Goal reached! 1000 signatures collected!');
+      alert('🎉 Goal reached! 1000 signatures collected! Twins Cooperate will contact the municipality.');
     } else {
-      alert('Thank you! Your signature has been added.');
+      alert('Thank you! Your signature has been saved.');
     }
     
   } catch(e) {
-    alert('Error saving. Please check internet connection.');
+    alert('Error saving. Check internet connection.');
   }
   
   submitBtn.disabled = false;
