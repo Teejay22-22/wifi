@@ -1,0 +1,173 @@
+import { useState, useEffect } from "react";
+
+const ADVANTAGES = [
+  { icon: "💰", title: "Save Money", desc: "R600 unlimited vs R99/GB mobile. 100GB costs R9,900 on cell data." },
+  { icon: "🎓", title: "Kids Education", desc: "Online classes, YouTube lessons, research for school without data stress." },
+  { icon: "💼", title: "Jobs & Business", desc: "Apply for jobs, sell on Facebook Marketplace, do online business from home." },
+  { icon: "🏥", title: "Health Info", desc: "Book clinic appointments, check health info, telehealth calls with doctors." },
+  { icon: "🎬", title: "Entertainment", desc: "Netflix, TikTok, WhatsApp video calls with family anywhere." },
+  { icon: "⚡", title: "24/7 Connection", desc: "No more 'out of data'. Wifi works day and night for whole family." }
+];
+
+export default function PetitionApp() {
+  const [signatures, setSignatures] = useState([]);
+  const [form, setForm] = useState({ name: "", cell: "", stand: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const goal = 1000; // your target clients
+
+  useEffect(() => {
+    // Load saved signatures from localStorage
+    const saved = JSON.parse(localStorage.getItem("villageWifiSigs") || "[]");
+    setSignatures(saved);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.name || !form.cell || !form.stand) return alert("Please fill all fields");
+    if (form.cell.length < 10) return alert("Enter valid cell number");
+
+    const newSig = { ...form, date: new Date().toLocaleDateString() };
+    const updated = [newSig, ...signatures];
+    setSignatures(updated);
+    localStorage.setItem("villageWifiSigs", JSON.stringify(updated));
+    
+    // Here you can add: fetch to Google Sheets/Backend to save data
+    // fetch('YOUR_BACKEND_URL', {method: 'POST', body: JSON.stringify(newSig)})
+    
+    setSubmitted(true);
+    setForm({ name: "", cell: "", stand: "" });
+  };
+
+  const progress = Math.min((signatures.length / goal) * 100, 100);
+
+  return (
+    <div style={styles.container}>
+      {/* Header */}
+      <div style={styles.header}>
+        <h1 style={styles.title}>📡 We Want Unlimited Wifi in Our Village!</h1>
+        <p style={styles.subtitle}>Sign the petition to bring 5MB unlimited internet home</p>
+      </div>
+
+      {/* Progress Bar */}
+      <div style={styles.progressBox}>
+        <div style={styles.progressText}>
+          {signatures.length} / {goal} villagers signed
+        </div>
+        <div style={styles.progressBar}>
+          <div style={{...styles.progressFill, width: `${progress}%`}}></div>
+        </div>
+        <p style={{fontSize: 12, color: "#666", marginTop: 5}}>
+          At 1000 signatures we bring the tower. Target: 6 months
+        </p>
+      </div>
+
+      {/* Advantages Grid */}
+      <div style={styles.section}>
+        <h2 style={styles.sectionTitle}>Why Unlimited 5MB Wifi Changes Everything</h2>
+        <div style={styles.grid}>
+          {ADVANTAGES.map((a, i) => (
+            <div key={i} style={styles.card}>
+              <div style={styles.icon}>{a.icon}</div>
+              <h3 style={styles.cardTitle}>{a.title}</h3>
+              <p style={styles.cardDesc}>{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Petition Form */}
+      <div style={styles.section}>
+        <h2 style={styles.sectionTitle}>✍️ Add Your Name</h2>
+        {!submitted ? (
+          <form onSubmit={handleSubmit} style={styles.form}>
+            <input 
+              style={styles.input}
+              placeholder="Full Name" 
+              value={form.name}
+              onChange={e => setForm({...form, name: e.target.value})}
+            />
+            <input 
+              style={styles.input}
+              placeholder="Cell Number e.g. 0712345678" 
+              type="tel"
+              value={form.cell}
+              onChange={e => setForm({...form, cell: e.target.value})}
+            />
+            <input 
+              style={styles.input}
+              placeholder="Stand Number / House No" 
+              value={form.stand}
+              onChange={e => setForm({...form, stand: e.target.value})}
+            />
+            <button type="submit" style={styles.button}>Sign Petition ✊</button>
+          </form>
+        ) : (
+          <div style={styles.thankyou}>
+            <h3>Thank you {signatures[0]?.name}! 🙏</h3>
+            <p>Your signature brings us closer to 1000. Share this link with neighbors.</p>
+            <button onClick={() => setSubmitted(false)} style={styles.buttonSecondary}>
+              Sign Another Person
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Recent Signatures */}
+      <div style={styles.section}>
+        <h2 style={styles.sectionTitle}>Latest Supporters</h2>
+        <div style={styles.sigList}>
+          {signatures.slice(0, 20).map((s, i) => (
+            <div key={i} style={styles.sigItem}>
+              <span>👤 {s.name}</span>
+              <span style={{fontSize: 12, color: "#888"}}>Stand {s.stand} • {s.date}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Share */}
+      <div style={styles.shareBox}>
+        <p><b>Share on WhatsApp:</b></p>
+        <a 
+          href={`https://wa.me/?text=Sign the petition for unlimited wifi in our village! ${window.location.href}`}
+          style={styles.shareBtn}
+          target="_blank"
+        >
+          Share on WhatsApp 📲
+        </a>
+      </div>
+
+      <footer style={styles.footer}>
+        Project by Twinz Cooperate Services PTY LTD | Reg: 2024/44403/07
+      </footer>
+    </div>
+  );
+}
+
+const styles = {
+  container: { maxWidth: 600, margin: "0 auto", fontFamily: "Arial, sans-serif", background: "#f5f7fa", minHeight: "100vh" },
+  header: { background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", color: "white", padding: 30, textAlign: "center" },
+  title: { margin: 0, fontSize: 24 },
+  subtitle: { margin: "10px 0 0 0", opacity: 0.9 },
+  progressBox: { background: "white", margin: 20, padding: 20, borderRadius: 12, boxShadow: "0 2px 8px rgba(0,0,0,0.1)" },
+  progressText: { fontWeight: "bold", marginBottom: 10 },
+  progressBar: { height: 20, background: "#e0e0e0", borderRadius: 10, overflow: "hidden" },
+  progressFill: { height: "100%", background: "linear-gradient(90deg, #4CAF50, #8BC34A)", transition: "width 0.5s" },
+  section: { margin: 20 },
+  sectionTitle: { fontSize: 20, marginBottom: 15, color: "#333" },
+  grid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 12 },
+  card: { background: "white", padding: 15, borderRadius: 10, boxShadow: "0 2px 5px rgba(0,0,0,0.08)" },
+  icon: { fontSize: 32, marginBottom: 8 },
+  cardTitle: { margin: "5px 0", fontSize: 16 },
+  cardDesc: { fontSize: 13, color: "#555", margin: 0 },
+  form: { background: "white", padding: 20, borderRadius: 10, display: "flex", flexDirection: "column", gap: 12 },
+  input: { padding: 12, border: "2px solid #ddd", borderRadius: 8, fontSize: 16 },
+  button: { padding: 14, background: "#667eea", color: "white", border: "none", borderRadius: 8, fontSize: 16, fontWeight: "bold", cursor: "pointer" },
+  buttonSecondary: { padding: 12, background: "white", color: "#667eea", border: "2px solid #667eea", borderRadius: 8, fontSize: 14, cursor: "pointer" },
+  thankyou: { background: "#e8f5e9", padding: 20, borderRadius: 10, textAlign: "center" },
+  sigList: { background: "white", padding: 15, borderRadius: 10, maxHeight: 300, overflowY: "auto" },
+  sigItem: { display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #eee" },
+  shareBox: { background: "white", margin: 20, padding: 20, borderRadius: 10, textAlign: "center" },
+  shareBtn: { display: "inline-block", padding: "12px 24px", background: "#25D366", color: "white", textDecoration: "none", borderRadius: 8, fontWeight: "bold" },
+  footer: { textAlign: "center", padding: 20, fontSize: 12, color: "#999" }
+};
