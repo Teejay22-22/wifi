@@ -1,173 +1,199 @@
-import { useState, useEffect } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>We Want Wifi - Village Petition</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f0f4ff;
+    color: #333;
+  }
+ .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+ .header {
+    background: #4f46e5;
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+ .header h1 { margin: 0; font-size: 22px; }
+ .card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+ .benefits { display: grid; gap: 10px; }
+ .benefit {
+    padding: 12px;
+    background: #eef2ff;
+    border-left: 4px solid #4f46e5;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+ .benefit b { color: #4f46e5; }
+  input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  button:active { transform: scale(0.98); }
+ .counter {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+ .whatsapp {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+ .whatsapp a {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+ .email {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+  }
+ .email a { color: #4f46e5; text-decoration: none; }
+ .success {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div class="container">
 
-const ADVANTAGES = [
-  { icon: "💰", title: "Save Money", desc: "R600 unlimited vs R99/GB mobile. 100GB costs R9,900 on cell data." },
-  { icon: "🎓", title: "Kids Education", desc: "Online classes, YouTube lessons, research for school without data stress." },
-  { icon: "💼", title: "Jobs & Business", desc: "Apply for jobs, sell on Facebook Marketplace, do online business from home." },
-  { icon: "🏥", title: "Health Info", desc: "Book clinic appointments, check health info, telehealth calls with doctors." },
-  { icon: "🎬", title: "Entertainment", desc: "Netflix, TikTok, WhatsApp video calls with family anywhere." },
-  { icon: "⚡", title: "24/7 Connection", desc: "No more 'out of data'. Wifi works day and night for whole family." }
-];
+  <div class="header">
+    <h1>📡 We Need Unlimited Wifi</h1>
+    <p>Sign petition to bring 5MB unlimited internet home - R600/month</p>
+  </div>
 
-export default function PetitionApp() {
-  const [signatures, setSignatures] = useState([]);
-  const [form, setForm] = useState({ name: "", cell: "", stand: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const goal = 1000; // your target clients
-
-  useEffect(() => {
-    // Load saved signatures from localStorage
-    const saved = JSON.parse(localStorage.getItem("villageWifiSigs") || "[]");
-    setSignatures(saved);
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!form.name || !form.cell || !form.stand) return alert("Please fill all fields");
-    if (form.cell.length < 10) return alert("Enter valid cell number");
-
-    const newSig = { ...form, date: new Date().toLocaleDateString() };
-    const updated = [newSig, ...signatures];
-    setSignatures(updated);
-    localStorage.setItem("villageWifiSigs", JSON.stringify(updated));
-    
-    // Here you can add: fetch to Google Sheets/Backend to save data
-    // fetch('YOUR_BACKEND_URL', {method: 'POST', body: JSON.stringify(newSig)})
-    
-    setSubmitted(true);
-    setForm({ name: "", cell: "", stand: "" });
-  };
-
-  const progress = Math.min((signatures.length / goal) * 100, 100);
-
-  return (
-    <div style={styles.container}>
-      {/* Header */}
-      <div style={styles.header}>
-        <h1 style={styles.title}>📡 We Want Unlimited Wifi in Our Village!</h1>
-        <p style={styles.subtitle}>Sign the petition to bring 5MB unlimited internet home</p>
-      </div>
-
-      {/* Progress Bar */}
-      <div style={styles.progressBox}>
-        <div style={styles.progressText}>
-          {signatures.length} / {goal} villagers signed
-        </div>
-        <div style={styles.progressBar}>
-          <div style={{...styles.progressFill, width: `${progress}%`}}></div>
-        </div>
-        <p style={{fontSize: 12, color: "#666", marginTop: 5}}>
-          At 1000 signatures we bring the tower. Target: 6 months
-        </p>
-      </div>
-
-      {/* Advantages Grid */}
-      <div style={styles.section}>
-        <h2 style={styles.sectionTitle}>Why Unlimited 5MB Wifi Changes Everything</h2>
-        <div style={styles.grid}>
-          {ADVANTAGES.map((a, i) => (
-            <div key={i} style={styles.card}>
-              <div style={styles.icon}>{a.icon}</div>
-              <h3 style={styles.cardTitle}>{a.title}</h3>
-              <p style={styles.cardDesc}>{a.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Petition Form */}
-      <div style={styles.section}>
-        <h2 style={styles.sectionTitle}>✍️ Add Your Name</h2>
-        {!submitted ? (
-          <form onSubmit={handleSubmit} style={styles.form}>
-            <input 
-              style={styles.input}
-              placeholder="Full Name" 
-              value={form.name}
-              onChange={e => setForm({...form, name: e.target.value})}
-            />
-            <input 
-              style={styles.input}
-              placeholder="Cell Number e.g. 0712345678" 
-              type="tel"
-              value={form.cell}
-              onChange={e => setForm({...form, cell: e.target.value})}
-            />
-            <input 
-              style={styles.input}
-              placeholder="Stand Number / House No" 
-              value={form.stand}
-              onChange={e => setForm({...form, stand: e.target.value})}
-            />
-            <button type="submit" style={styles.button}>Sign Petition ✊</button>
-          </form>
-        ) : (
-          <div style={styles.thankyou}>
-            <h3>Thank you {signatures[0]?.name}! 🙏</h3>
-            <p>Your signature brings us closer to 1000. Share this link with neighbors.</p>
-            <button onClick={() => setSubmitted(false)} style={styles.buttonSecondary}>
-              Sign Another Person
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Recent Signatures */}
-      <div style={styles.section}>
-        <h2 style={styles.sectionTitle}>Latest Supporters</h2>
-        <div style={styles.sigList}>
-          {signatures.slice(0, 20).map((s, i) => (
-            <div key={i} style={styles.sigItem}>
-              <span>👤 {s.name}</span>
-              <span style={{fontSize: 12, color: "#888"}}>Stand {s.stand} • {s.date}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Share */}
-      <div style={styles.shareBox}>
-        <p><b>Share on WhatsApp:</b></p>
-        <a 
-          href={`https://wa.me/?text=Sign the petition for unlimited wifi in our village! ${window.location.href}`}
-          style={styles.shareBtn}
-          target="_blank"
-        >
-          Share on WhatsApp 📲
-        </a>
-      </div>
-
-      <footer style={styles.footer}>
-        Project by Twinz Cooperate Services PTY LTD | Reg: 2024/44403/07
-      </footer>
+  <div class="card">
+    <div class="counter">Signatures: <span id="count">0</span> / 1000</div>
+    <div style="height:8px;background:#e0e0e0;border-radius:4px;overflow:hidden">
+      <div id="bar" style="height:100%;width:0%;background:#4f46e5;transition:0.5s"></div>
     </div>
-  );
-}
+  </div>
 
-const styles = {
-  container: { maxWidth: 600, margin: "0 auto", fontFamily: "Arial, sans-serif", background: "#f5f7fa", minHeight: "100vh" },
-  header: { background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", color: "white", padding: 30, textAlign: "center" },
-  title: { margin: 0, fontSize: 24 },
-  subtitle: { margin: "10px 0 0 0", opacity: 0.9 },
-  progressBox: { background: "white", margin: 20, padding: 20, borderRadius: 12, boxShadow: "0 2px 8px rgba(0,0,0,0.1)" },
-  progressText: { fontWeight: "bold", marginBottom: 10 },
-  progressBar: { height: 20, background: "#e0e0e0", borderRadius: 10, overflow: "hidden" },
-  progressFill: { height: "100%", background: "linear-gradient(90deg, #4CAF50, #8BC34A)", transition: "width 0.5s" },
-  section: { margin: 20 },
-  sectionTitle: { fontSize: 20, marginBottom: 15, color: "#333" },
-  grid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 12 },
-  card: { background: "white", padding: 15, borderRadius: 10, boxShadow: "0 2px 5px rgba(0,0,0,0.08)" },
-  icon: { fontSize: 32, marginBottom: 8 },
-  cardTitle: { margin: "5px 0", fontSize: 16 },
-  cardDesc: { fontSize: 13, color: "#555", margin: 0 },
-  form: { background: "white", padding: 20, borderRadius: 10, display: "flex", flexDirection: "column", gap: 12 },
-  input: { padding: 12, border: "2px solid #ddd", borderRadius: 8, fontSize: 16 },
-  button: { padding: 14, background: "#667eea", color: "white", border: "none", borderRadius: 8, fontSize: 16, fontWeight: "bold", cursor: "pointer" },
-  buttonSecondary: { padding: 12, background: "white", color: "#667eea", border: "2px solid #667eea", borderRadius: 8, fontSize: 14, cursor: "pointer" },
-  thankyou: { background: "#e8f5e9", padding: 20, borderRadius: 10, textAlign: "center" },
-  sigList: { background: "white", padding: 15, borderRadius: 10, maxHeight: 300, overflowY: "auto" },
-  sigItem: { display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #eee" },
-  shareBox: { background: "white", margin: 20, padding: 20, borderRadius: 10, textAlign: "center" },
-  shareBtn: { display: "inline-block", padding: "12px 24px", background: "#25D366", color: "white", textDecoration: "none", borderRadius: 8, fontWeight: "bold" },
-  footer: { textAlign: "center", padding: 20, fontSize: 12, color: "#999" }
+  <div class="card">
+    <h3 style="margin-top:0">Why Unlimited Wifi?</h3>
+    <div class="benefits">
+      <div class="benefit"><b>💰 Save Money:</b> R600 unlimited vs R99/GB on cell data</div>
+      <div class="benefit"><b>🎓 School:</b> Kids do homework + online classes without data stress</div>
+      <div class="benefit"><b>💼 Jobs:</b> Apply online + sell on Facebook from home</div>
+      <div class="benefit"><b>⚡ 24/7:</b> No more "out of data". Whole family connected</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Add Your Phone Number</h3>
+    <div id="success" class="success">Thank you! Your number is added 🙏 Share with neighbors</div>
+    <form id="form">
+      <input type="tel" id="phone" placeholder="Enter your cell number e.g. 0712345678" required>
+      <button type="submit">Sign Petition ✊</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Contact Us</h3>
+    <div class="whatsapp">
+      <a href="https://wa.me/27XXXXXXXXXX?text=Hi, I want unlimited wifi in my village" target="_blank">WhatsApp 1</a>
+      <a href="https://wa.me/27YYYYYY?text=Hi, I want unlimited wifi in my village" target="_blank">WhatsApp 2</a>
+    </div>
+    <div class="email">
+      Email: <a href="mailto:twinz.cooperate.services@gmail.com">twinz.cooperate.services@gmail.com</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const GOAL = 1000;
+// Replace with your 2 WhatsApp numbers including country code, no + or spaces
+const WHATSAPP1 = "27712345678";
+const WHATSAPP2 = "27823456789";
+
+// Load saved numbers
+let numbers = JSON.parse(localStorage.getItem("wifiNumbers") || "[]");
+updateCounter();
+
+document.getElementById("form").onsubmit = function(e) {
+  e.preventDefault();
+  let phone = document.getElementById("phone").value.trim();
+
+  if(phone.length < 10) {
+    alert("Please enter a valid phone number");
+    return;
+  }
+
+  if(numbers.includes(phone)) {
+    alert("This number already signed");
+    return;
+  }
+
+  numbers.unshift(phone);
+  localStorage.setItem("wifiNumbers", JSON.stringify(numbers));
+
+  // TODO: Send to backend/Google Sheet here
+  // fetch('YOUR_URL', {method:'POST', body: JSON.stringify({phone, date: new Date()})})
+
+  document.getElementById("form").reset();
+  document.getElementById("success").style.display = "block";
+  updateCounter();
+
+  setTimeout(() => {
+    document.getElementById("success").style.display = "none";
+  }, 3000);
 };
+
+function updateCounter() {
+  let count = numbers.length;
+  document.getElementById("count").textContent = count;
+  document.getElementById("bar").style.width = Math.min((count/GOAL)*100, 100) + "%";
+
+  // Update WhatsApp links with real numbers
+  document.querySelectorAll(".whatsapp a")[0].href = `https://wa.me/${WHATSAPP1}?text=Hi, I signed the wifi petition for my village`;
+  document.querySelectorAll(".whatsapp a")[1].href = `https://wa.me/${WHATSAPP2}?text=Hi, I signed the wifi petition for my village`;
+}
+</script>
+</body>
+</html>
