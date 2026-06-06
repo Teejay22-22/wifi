@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>We Want Wifi - Village Petition</title>
+<title>Twins Cooperate Services - Village Petition</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -11,12 +11,12 @@
     background: #f0f4ff;
     color: #333;
   }
- .container {
+.container {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
   }
- .header {
+.header {
     background: #4f46e5;
     color: white;
     padding: 25px;
@@ -24,23 +24,24 @@
     text-align: center;
     margin-bottom: 20px;
   }
- .header h1 { margin: 0; font-size: 22px; }
- .card {
+.header h1 { margin: 0; font-size: 22px; }
+.header p { margin: 10px 0 0 0; font-size: 14px; line-height: 1.4; }
+.card {
     background: white;
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 15px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
- .benefits { display: grid; gap: 10px; }
- .benefit {
+.benefits { display: grid; gap: 10px; }
+.benefit {
     padding: 12px;
     background: #eef2ff;
     border-left: 4px solid #4f46e5;
     border-radius: 6px;
     font-size: 14px;
   }
- .benefit b { color: #4f46e5; }
+.benefit b { color: #4f46e5; }
   input {
     width: 100%;
     padding: 14px;
@@ -62,18 +63,18 @@
     cursor: pointer;
   }
   button:active { transform: scale(0.98); }
- .counter {
+.counter {
     text-align: center;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
   }
- .whatsapp {
+.whatsapp {
     display: flex;
     gap: 10px;
     margin-top: 15px;
   }
- .whatsapp a {
+.whatsapp a {
     flex: 1;
     text-align: center;
     padding: 12px;
@@ -82,14 +83,15 @@
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
+    font-size: 14px;
   }
- .email {
+.email {
     text-align: center;
     margin-top: 15px;
     font-size: 14px;
   }
- .email a { color: #4f46e5; text-decoration: none; }
- .success {
+.email a { color: #4f46e5; text-decoration: none; }
+.success {
     background: #d1fae5;
     color: #065f46;
     padding: 15px;
@@ -103,8 +105,8 @@
 <div class="container">
 
   <div class="header">
-    <h1>📡 We Need Unlimited Wifi</h1>
-    <p>Sign petition to bring 5MB unlimited internet home - R600/month</p>
+    <h1>📡 Twinz Cooperate Services Provides Unlimited Wifi</h1>
+    <p>Sign petition to bring unlimited wifi internet for home and business that is reliable and affordable starting at only R600 per month. Join us to make our community better.</p>
   </div>
 
   <div class="card">
@@ -118,9 +120,9 @@
     <h3 style="margin-top:0">Why Unlimited Wifi?</h3>
     <div class="benefits">
       <div class="benefit"><b>💰 Save Money:</b> R600 unlimited vs R99/GB on cell data</div>
-      <div class="benefit"><b>🎓 School:</b> Kids do homework + online classes without data stress</div>
-      <div class="benefit"><b>💼 Jobs:</b> Apply online + sell on Facebook from home</div>
-      <div class="benefit"><b>⚡ 24/7:</b> No more "out of data". Whole family connected</div>
+      <div class="benefit"><b>🎓 Education:</b> Kids do homework + online classes without data stress</div>
+      <div class="benefit"><b>💼 Business:</b> Apply online + sell on Facebook + grow your business from home</div>
+      <div class="benefit"><b>⚡ Reliable 24/7:</b> No more "out of data". Whole family + business connected</div>
     </div>
   </div>
 
@@ -134,10 +136,10 @@
   </div>
 
   <div class="card">
-    <h3 style="margin-top:0">Contact Us</h3>
+    <h3 style="margin-top:0">Contact Twinz Cooperate Services</h3>
     <div class="whatsapp">
-      <a href="https://wa.me/27XXXXXXXXXX?text=Hi, I want unlimited wifi in my village" target="_blank">WhatsApp 1</a>
-      <a href="https://wa.me/27YYYYYY?text=Hi, I want unlimited wifi in my village" target="_blank">WhatsApp 2</a>
+      <a href="https://wa.me/27XXXXXXXXXX?text=Hi, I signed the wifi petition for my village" target="_blank">WhatsApp 1</a>
+      <a href="https://wa.me/27YYYY?text=Hi, I signed the wifi petition for my village" target="_blank">WhatsApp 2</a>
     </div>
     <div class="email">
       Email: <a href="mailto:twinz.cooperate.services@gmail.com">twinz.cooperate.services@gmail.com</a>
@@ -148,7 +150,7 @@
 
 <script>
 const GOAL = 1000;
-// Replace with your 2 WhatsApp numbers including country code, no + or spaces
+// Replace with your 2 WhatsApp numbers: 27 + number without 0
 const WHATSAPP1 = "27712345678";
 const WHATSAPP2 = "27823456789";
 
@@ -173,9 +175,6 @@ document.getElementById("form").onsubmit = function(e) {
   numbers.unshift(phone);
   localStorage.setItem("wifiNumbers", JSON.stringify(numbers));
 
-  // TODO: Send to backend/Google Sheet here
-  // fetch('YOUR_URL', {method:'POST', body: JSON.stringify({phone, date: new Date()})})
-
   document.getElementById("form").reset();
   document.getElementById("success").style.display = "block";
   updateCounter();
@@ -190,7 +189,7 @@ function updateCounter() {
   document.getElementById("count").textContent = count;
   document.getElementById("bar").style.width = Math.min((count/GOAL)*100, 100) + "%";
 
-  // Update WhatsApp links with real numbers
+  // Update WhatsApp links
   document.querySelectorAll(".whatsapp a")[0].href = `https://wa.me/${WHATSAPP1}?text=Hi, I signed the wifi petition for my village`;
   document.querySelectorAll(".whatsapp a")[1].href = `https://wa.me/${WHATSAPP2}?text=Hi, I signed the wifi petition for my village`;
 }
