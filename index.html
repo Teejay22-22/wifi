@@ -17,7 +17,7 @@
     padding: 20px;
   }
 .header {
-    background: #4f46e5;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
     color: white;
     padding: 25px 20px;
     border-radius: 12px;
@@ -28,12 +28,15 @@
     max-width: 140px;
     margin-bottom: 15px;
     border-radius: 10px;
+    background: white;
+    padding: 8px;
   }
 .wifi-img {
     width: 80px;
     height: 80px;
     margin: 15px auto 0;
     display: block;
+    filter: brightness(0) invert(1);
   }
 .header h1 { margin: 0; font-size: 20px; }
 .header p { margin: 10px 0 0 0; font-size: 14px; line-height: 1.4; }
@@ -43,6 +46,24 @@
     border-radius: 12px;
     margin-bottom: 15px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+.graphic {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(180deg, #eef2ff 0%, #dbeafe 100%);
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+.graphic img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+.graphic p {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #4338ca;
+    font-weight: bold;
   }
 .benefits { display: grid; gap: 10px; }
 .benefit {
@@ -73,7 +94,6 @@
     font-weight: bold;
     cursor: pointer;
   }
-  button:active { transform: scale(0.98); }
 .counter {
     text-align: center;
     font-size: 18px;
@@ -116,15 +136,21 @@
 <div class="container">
 
   <div class="header">
-    <!-- Your logo -->
-    <img src="logo.png" alt="Twins Cooperate Services Logo" class="logo">
+    <!-- Logo embedded so it always shows -->
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccq1iAAAM" alt="Twins Cooperate Services Logo" class="logo">
 
     <h1>Twins Cooperate Services Provides Unlimited Wifi</h1>
 
-    <!-- Wifi image -->
+    <!-- Wifi icon -->
     <img src="https://cdn-icons-png.flaticon.com/512/39/39740.png" alt="Wifi Signal" class="wifi-img">
 
     <p>Sign petition to bring unlimited wifi internet for home and business that is reliable and affordable starting at only R600 per month. Join us to make our community better.</p>
+  </div>
+
+  <!-- NEW GRAPHIC SECTION -->
+  <div class="graphic">
+    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" alt="Community connected by wifi">
+    <p>📡 Connecting Every Home & Business in Our Community</p>
   </div>
 
   <div class="card">
